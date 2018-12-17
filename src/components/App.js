@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import SearchBar from './SearchBar';
+import unsplash from '../api/unsplash';
+import ImageList from './ImageList';
 
 
 class App extends Component {
-    async onSearchSubmit(condition) {
+    state = { images: [] }
+
+    onSearchSubmit = async condition => {
       // console.log(condition);
-      const response = await axios.get("https://api.unsplash.com/search/photos", {
-        params: { query: condition }, 
-        headers: {
-          Authorization: 'Client-ID '
-        }
+      const response = await unsplash.get("/search/photos", {
+        params: { query: condition }
+
       });
-      console.log(response.data.results);
+
+      this.setState({ images: response.data.results })
+      // console.log(response.data.results);
     }
   
     
@@ -21,6 +24,7 @@ class App extends Component {
         return (
         <div className="ui container" style={{marginTop: '10px'}}>
           <SearchBar onSubmit={this.onSearchSubmit}/>
+          <ImageList images={this.state.images}/> 
         </div>
     );
   }
