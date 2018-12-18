@@ -19,7 +19,7 @@ export default class SearchBar extends Component {
         <form onSubmit={this.onFormSubmit} className="ui form">
         <div className="field">
           <label>Image-search</label>
-          <input type="text" value={this.state.condition} onChange={(event) => {this.setState({ condition: event.target.value })}}/>
+          <input type="text" value={this.state.condition} onChange={(ev) => {this.setState({ condition: ev.target.value })}}/>
         </div>
         </form>
       </div>
